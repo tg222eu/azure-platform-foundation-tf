@@ -1,15 +1,11 @@
-#Example variables
 variable "location" {
     description = "Azure region"
     type        = string
-    default     = "West Europe"
-}
-variable "environment" {
-    description = "Environment name (dev, staging, prod)"
-    type        = string
+    default     = "North Europe"
 }
 
-variable "resource_group_name" {
-    description = "A description here is always needed"
-    type = string
+variable "resource_group_name"{
+    description = "Name of the resource group"
+    type        = string
+    default     = "test-rg"
 }
