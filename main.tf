@@ -1,11 +1,11 @@
 terraform {
   # Will be filled later
-  backend "azurerm" {}
+  #backend "azurerm" {}
 }
 
-#provider "azurerm" {
-#  features {}
-#}
+provider "azurerm" {
+  features {}
+}
 
 resource "azurerm_resource_group" "main"{
   name = var.resource_group_name
