@@ -3,6 +3,7 @@ Boilerplate
 Phase 1 — Start simple
 networking module (VNet + subnets + NSGs)
 Add diagnostic settings for NSG flow logs
+Create Log Analytics Workspace
 
 Phase 2 — Add security
 Add the Key Vault and identity modules
@@ -13,4 +14,3 @@ storage module and GitHub Actions workflow
 Log: Add diagnostic settings to Storage
 
 Phase 4 — Document everything
-Create a proper monitoring module that ties everything together
