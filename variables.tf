@@ -18,6 +18,8 @@ variable "virtual_network_name"{
     default     = "vnet-platform-dev"
 }
 
+##########SUBNETS###########
+
 variable "app_subnet_name"{
     description = "App subnet name"
     type        = string
@@ -52,4 +54,24 @@ variable "management_subnet_address_prefix"{
     description = "Management address prefix"
     type        = string
     default     = "10.0.3.0/24"
+}
+
+######## NSG #########
+
+variable "nsg_app_name"{
+    description = "App NSG"
+    type        = string
+    default     = "nsg-app-platform-dev"
+}
+
+variable "nsg_data_name"{
+    description = "Data NSG"
+    type        = string
+    default     = "nsg-data-platform-dev"
+}
+
+variable "nsg_mgmt_name"{
+    description = "Management NSG"
+    type        = string
+    default     = "nsg-mgmt-platform-dev"
 }
