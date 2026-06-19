@@ -7,10 +7,6 @@ terraform {
   }
 }
 
-provider "azurerm" {
-  features {}
-}
-
 resource "azurerm_resource_group" "networking" {
   name      = var.networking_resource_group_name
   location  = var.location
