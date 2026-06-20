@@ -47,18 +47,21 @@ resource "azurerm_network_security_group" "app" {
   name                  = var.app_nsg_name
   location              = var.location
   resource_group_name   = var.platform_resource_group_name
+  depends_on            = [azurerm_virtual_network.hub]
 }
 
 resource "azurerm_network_security_group" "data" {
   name                  = var.data_nsg_name
   location              = var.location
   resource_group_name   = var.platform_resource_group_name
+  depends_on            = [azurerm_virtual_network.hub]
 }
 
 resource "azurerm_network_security_group" "mgmt" {
   name                  = var.mgmt_nsg_name
   location              = var.location
   resource_group_name   = var.platform_resource_group_name
+  depends_on            = [azurerm_virtual_network.hub]
 }
 
 resource "azurerm_subnet_network_security_group_association" "app" {
