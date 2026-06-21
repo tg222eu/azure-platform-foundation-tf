@@ -81,7 +81,7 @@ variable "mgmt_nsg_name"{
 }
 
 # ==========================
-# Tags
+# TAGS
 # ==========================
 
 variable "environment" {
