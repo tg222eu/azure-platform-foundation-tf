@@ -133,7 +133,7 @@ resource "azurerm_network_security_rule" "mgmt_allow_rdp" {
   priority                    = 100
   direction                   = "Inbound"
   access                      = "Allow"
-  protocol                    = "TCP"
+  protocol                    = "Tcp"
   source_port_range           = "*"
   destination_port_range      = "3389"
   source_address_prefix       = var.my_public_ip
@@ -148,7 +148,7 @@ resource "azurerm_network_security_rule" "mgmt_allow_ssh" {
   priority                    = 110
   direction                   = "Inbound"
   access                      = "Allow"
-  protocol                    = "TCP"
+  protocol                    = "Tcp"
   source_port_range           = "*"
   destination_port_range      = "22"
   source_address_prefix       = var.my_public_ip
