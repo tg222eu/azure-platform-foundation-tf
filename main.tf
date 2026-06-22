@@ -118,3 +118,18 @@ resource "azurerm_network_security_rule" "mgmt_allow_rdp" {
   network_security_group_name = azurerm_network_security_group.mgmt.name
   description                 = "Allow RDP from specific IP"
 }
+
+resource "azurerm_network_security_rule" "mgmt_allow_ssh" {
+  name                        = "Allow-SSH-22-from-IP"
+  priority                    = 110
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "TCP"
+  source_port_range           = "*"
+  destination_port_range      = "22"
+  source_address_prefix       = var.my_public_ip
+  destination_address_prefix  = "*"
+  resource_group_name         = azurerm_resource_group.platform.name
+  network_security_group_name = azurerm_network_security_group.mgmt.name
+  description                 = "Allow SSH from specific IP"
+}
