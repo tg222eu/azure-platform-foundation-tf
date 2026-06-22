@@ -14,7 +14,7 @@ resource "azurerm_resource_group" "platform" {
 }
 
 # ==========================================
-# Networking - VNet + Subnets
+# Networking - VNet
 # ==========================================
 
 resource "azurerm_virtual_network" "hub" {
@@ -24,6 +24,10 @@ resource "azurerm_virtual_network" "hub" {
   address_space        = ["10.0.0.0/16"]
   tags                 = local.common_tags
 }
+
+# ==========================================
+# Networking - Subnets
+# ==========================================
 
 resource "azurerm_subnet" "app" {
   name                  = var.app_subnet_name
@@ -77,6 +81,10 @@ resource "azurerm_network_security_group" "mgmt" {
   tags                  = local.common_tags
 }
 
+# ==========================================
+# Networking - NSG Associations
+# ==========================================
+
 resource "azurerm_subnet_network_security_group_association" "app" {
   subnet_id                   = azurerm_subnet.app.id
   network_security_group_id   = azurerm_network_security_group.app.id
@@ -95,3 +103,18 @@ resource "azurerm_subnet_network_security_group_association" "mgmt" {
 # ==========================================
 # Networking - Security Rules
 # ==========================================
+
+resource "azurerm_network_security_rule" "mgmt_allow_rdp" {
+  name                        = "Allow-RDP-3389-from-IP"
+  priority                    = 100
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "TCP"
+  source_port_range           = "*"
+  destination_port_range      = "3389"
+  source_address_prefix       = var.my_public_ip
+  destination_address_prefix  = "*"
+  resource_group_name         = azurerm_resource_group.platform.name
+  network_security_group_name = azurerm_network_security_group.mgmt.name
+  description                 = "Allow RDP from specific IP"
+}
