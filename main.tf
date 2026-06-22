@@ -130,8 +130,8 @@ resource "azurerm_network_security_rule" "data_deny_internet" {
   source_address_prefix       = "Internet"
   destination_address_prefix  = "*"
   resource_group_name         = azurerm_resource_group.platform.name
-  network_security_group_name = azurerm_network_security_group.app.name
-  description                 = "Deny all inbound traffic from the internet to app subnet"
+  network_security_group_name = azurerm_network_security_group.data.name
+  description                 = "Deny all inbound traffic from the internet to data subnet"
 }
 
 resource "azurerm_network_security_rule" "mgmt_allow_rdp" {
