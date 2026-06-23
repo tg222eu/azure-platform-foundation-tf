@@ -65,3 +65,10 @@ resource "azurerm_key_vault" "main" {
   purge_protection_enabled    = false
   tags                        = local.common_tags
 }
+
+resource "azurerm_key_vault_secret" "test" {
+  name          = "sample-secret"
+  value         = var.secret_value # Have no purpose yet, just for testing
+  key_vault_id  = azurerm_key_vault.main.id
+  tags          = local.common_tags
+}
