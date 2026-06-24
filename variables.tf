@@ -112,8 +112,18 @@ variable "my_public_ip" {
   # IP stored locally
 }
 
+# ==========================
+# KEYS
+# ==========================
+
 variable "key_vault_name" {
   description = "Key vault name"
   type        = string
-  # Key stored locally
+  # Key vault value stored locally
+}
+
+variable "secret_value" {
+  description = "Key name"
+  type        = string
+  # Key value stored locally
 }
