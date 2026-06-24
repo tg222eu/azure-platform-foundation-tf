@@ -63,7 +63,7 @@ resource "azurerm_key_vault" "main" {
   tenant_id                   = data.azurerm_client_config.current_user.tenant_id
   sku_name                    = "standard"
   rbac_authorization_enabled  = true
-  soft_delete_retention_days  = 0 # Value is 0 while developing, standard 90
+  #soft_delete_retention_days  = 7 # Disabled while developing
   purge_protection_enabled    = false
   tags                        = local.common_tags
 }
@@ -76,7 +76,7 @@ resource "azurerm_key_vault_secret" "test" {
 }
 
 resource "azurerm_role_assignment" "key_vault_access" {
-  scope = azurerm_key_vault.current_user.id
+  scope = azurerm_key_vault.main.id
   role_definition_name = "Key Vault Secret Officer"
   principal_id = data.azurerm_client_config.current_user.object_id
 }
