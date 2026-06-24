@@ -7,6 +7,8 @@ terraform {
   }
 }
 
+data "azurerm_client_config" "current_user" {}
+
 resource "azurerm_resource_group" "platform" {
   name      = var.platform_resource_group_name
   location  = var.location
@@ -51,7 +53,7 @@ resource "azurerm_subnet" "mgmt" {
 }
 
 # ==========================================
-# Security - Key Vault
+# Security - Key Vault & Access (RBAC)
 # ==========================================
 
 resource "azurerm_key_vault" "main" {
@@ -71,6 +73,12 @@ resource "azurerm_key_vault_secret" "test" {
   value         = var.secret_value # Have no purpose yet, just for testing
   key_vault_id  = azurerm_key_vault.main.id
   tags          = local.common_tags
+}
+
+resource "azurerm_role_assignment" "key_vault_access" {
+  scope = azurerm_key_vault.current_user.id
+  role_definition_name = "Key Vault Secret Officer"
+  principal_id = data.azurerm_client_config.current_user.object_id
 }
 
 # ==========================================
