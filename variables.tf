@@ -6,16 +6,16 @@ variable "location" {
     default     = "Sweden Central"
 }
 
-variable "platform_resource_group_name"{
+variable "lz_resource_group_name"{
     description = "Resource group"
     type        = string
-    default     = "rg-platform-dev"
+    default     = "rg-lz-dev"
 }
 
 variable "virtual_network_name"{
     description = "App subnet"
     type        = string
-    default     = "vnet-platform-dev"
+    default     = "vnet-lz-dev"
 }
 
 # ==========================
@@ -25,19 +25,19 @@ variable "virtual_network_name"{
 variable "app_subnet_name"{
     description = "App subnet name"
     type        = string
-    default     = "snet-app-platform-dev"
+    default     = "snet-app-lz-dev"
 }
 
 variable "data_subnet_name"{
     description = "Data subnet name"
     type        = string
-    default     = "snet-data-platform-dev"
+    default     = "snet-data-lz-dev"
 }
 
 variable "management_subnet_name"{
     description = "Management subnet name"
     type        = string
-    default     = "snet-mgmt-platform-dev"
+    default     = "snet-mgmt-lz-dev"
 }
 
 variable "app_subnet_address_prefix"{
@@ -65,19 +65,19 @@ variable "management_subnet_address_prefix"{
 variable "app_nsg_name"{
     description = "App NSG"
     type        = string
-    default     = "nsg-app-platform-dev"
+    default     = "nsg-app-lz-dev"
 }
 
 variable "data_nsg_name"{
     description = "Data NSG"
     type        = string
-    default     = "nsg-data-platform-dev"
+    default     = "nsg-data-lz-dev"
 }
 
 variable "mgmt_nsg_name"{
     description = "Management NSG"
     type        = string
-    default     = "nsg-mgmt-platform-dev"
+    default     = "nsg-mgmt-lz-dev"
 }
 
 # ==========================
@@ -99,7 +99,7 @@ variable "owner" {
 variable "cost_center" {
     description = "Cost center for billing"
     type        = string
-    default     = "IT-Platform"
+    default     = "IT-LandingZone"
 }
 
 # ==========================

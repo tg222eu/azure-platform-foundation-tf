@@ -3,14 +3,14 @@ terraform {
     resource_group_name  = "rg-terraform-state"
     storage_account_name = "stterraformstate9482"
     container_name       = "tfstate"
-    key                  = "platform-foundation.tfstate"
+    key                  = "landing-zone.tfstate"
   }
 }
 
 data "azurerm_client_config" "current_user" {}
 
-resource "azurerm_resource_group" "platform" {
-  name      = var.platform_resource_group_name
+resource "azurerm_resource_group" "lz" {
+  name      = var.lz_resource_group_name
   location  = var.location
   tags      = local.common_tags
 }
@@ -22,7 +22,7 @@ resource "azurerm_resource_group" "platform" {
 resource "azurerm_virtual_network" "hub" {
   name                 = var.virtual_network_name
   location             = var.location
-  resource_group_name  = azurerm_resource_group.platform.name
+  resource_group_name  = azurerm_resource_group.lz.name
   address_space        = ["10.0.0.0/16"]
   tags                 = local.common_tags
 }
@@ -34,21 +34,21 @@ resource "azurerm_virtual_network" "hub" {
 resource "azurerm_subnet" "app" {
   name                  = var.app_subnet_name
   virtual_network_name  = azurerm_virtual_network.hub.name
-  resource_group_name   = azurerm_resource_group.platform.name
+  resource_group_name   = azurerm_resource_group.lz.name
   address_prefixes      = [var.app_subnet_address_prefix]
 }
 
 resource "azurerm_subnet" "data" {
   name                  = var.data_subnet_name
   virtual_network_name  = azurerm_virtual_network.hub.name
-  resource_group_name   = azurerm_resource_group.platform.name
+  resource_group_name   = azurerm_resource_group.lz.name
   address_prefixes      = [var.data_subnet_address_prefix]
 }
 
 resource "azurerm_subnet" "mgmt" {
   name                  = var.management_subnet_name
   virtual_network_name  = azurerm_virtual_network.hub.name
-  resource_group_name   = azurerm_resource_group.platform.name
+  resource_group_name   = azurerm_resource_group.lz.name
   address_prefixes      = [var.management_subnet_address_prefix]
 }
 
@@ -59,7 +59,7 @@ resource "azurerm_subnet" "mgmt" {
 resource "azurerm_key_vault" "main" {
   name                        = var.key_vault_name
   location                    = var.location
-  resource_group_name         = azurerm_resource_group.platform.name
+  resource_group_name         = azurerm_resource_group.lz.name
   tenant_id                   = data.azurerm_client_config.current_user.tenant_id
   sku_name                    = "standard"
   rbac_authorization_enabled  = true
@@ -92,7 +92,7 @@ resource "azurerm_role_assignment" "key_vault_access" {
 
 resource "azurerm_storage_account" "logs" {
   name                        = var.storage_account_log_name
-  resource_group_name         = azurerm_resource_group.platform.name
+  resource_group_name         = azurerm_resource_group.lz.name
   location                    = var.location
   account_tier                = "Standard"
   account_replication_type    = "LRS"
