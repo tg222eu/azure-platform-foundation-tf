@@ -73,17 +73,14 @@ resource "azurerm_key_vault_secret" "test" {
   value         = var.secret_value # Have no purpose yet, just for testing
   key_vault_id  = azurerm_key_vault.main.id
   tags          = local.common_tags
+
+  depends_on = [ azurerm_role_assignment.key_vault_access ]
 }
 
 resource "azurerm_role_assignment" "key_vault_access" {
-  scope                 = azurerm_key_vault.main.id
+  scope                 = azurerm_resource_group.lz.id
   role_definition_name  = "Key Vault Secrets Officer"
   principal_id          = data.azurerm_client_config.current_user.object_id
-
-  # Must exist to terraform destroy key vault
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 resource "azurerm_role_assigntment" "resource_group_reader" {
