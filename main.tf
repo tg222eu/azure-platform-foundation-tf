@@ -76,14 +76,20 @@ resource "azurerm_key_vault_secret" "test" {
 }
 
 resource "azurerm_role_assignment" "key_vault_access" {
-  scope = azurerm_key_vault.main.id
-  role_definition_name = "Key Vault Secrets Officer"
-  principal_id = data.azurerm_client_config.current_user.object_id
+  scope                 = azurerm_key_vault.main.id
+  role_definition_name  = "Key Vault Secrets Officer"
+  principal_id          = data.azurerm_client_config.current_user.object_id
 
   # Must exist to terraform destroy key vault
   lifecycle {
     prevent_destroy = true
   }
+}
+
+resource "azurerm_role_assigntment" "resource_group_reader" {
+  scope = azurerm_resource_group.lz.id
+  role_definition_name = "Reader"
+  principal_id = data.azuread_client_config.current_user.object_id
 }
 
 # ==========================================
