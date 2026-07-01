@@ -89,9 +89,9 @@ resource "azurerm_role_assignment" "key_vault_access" {
 }
 
 resource "azurerm_role_assignment" "resource_group_reader" {
-  scope = azurerm_resource_group.lz.id
-  role_definition_name = "Reader"
-  principal_id = data.azuread_client_config.readers.object_id
+  scope                 = azurerm_resource_group.lz.id
+  role_definition_name  = "Reader"
+  principal_id          = data.azuread_client_config.readers.object_id
 }
 
 # ==========================================
@@ -99,10 +99,10 @@ resource "azurerm_role_assignment" "resource_group_reader" {
 # ==========================================
 
 resource "azuread_group" "readers" {
-  display_name = "rg-lz-readers"
-  description = "Read-only access to landing zone resource group"
-  security_enabled = true
-  mail_enabled = false
+  display_name      = "rg-lz-readers"
+  description       = "Read-only access to landing zone resource group"
+  security_enabled  = true
+  mail_enabled      = false
 }
 
 # ==========================================
