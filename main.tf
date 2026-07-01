@@ -8,6 +8,7 @@ terraform {
 }
 
 data "azurerm_client_config" "current_user" {}
+data "azuread_client_config" "current_user" {} # For testing
 
 resource "azurerm_resource_group" "lz" {
   name      = var.lz_resource_group_name
@@ -78,7 +79,7 @@ resource "azurerm_key_vault_secret" "test" {
 }
 
 # ==========================================
-# Security - RBAC & Groups
+# Security - RBAC
 # ==========================================
 
 resource "azurerm_role_assignment" "key_vault_access" {
@@ -92,6 +93,10 @@ resource "azurerm_role_assignment" "resource_group_reader" {
   role_definition_name = "Reader"
   principal_id = data.azuread_client_config.readers.object_id
 }
+
+# ==========================================
+# Groups
+# ==========================================
 
 resource "azuread_group" "readers" {
   display_name = "rg-lz-readers"
