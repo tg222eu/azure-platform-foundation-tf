@@ -147,5 +147,5 @@ variable "storage_account_log_name" {
 variable "log_analytics_name" {
   description = "Name of log analytics"
   type        = string
-  default     = "log-analytic-platform-dev"
+  default     = "log-platform-dev"
 }
