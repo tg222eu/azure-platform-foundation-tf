@@ -112,7 +112,7 @@ resource "azuread_group" "readers" {
 # Analytics & Logs - Storage
 # =============================================================================
 
-resource "azurerm_storage_account" "logs" {
+resource "azurerm_storage_account" "main" {
   name                        = var.storage_account_log_name
   resource_group_name         = azurerm_resource_group.platform.name
   location                    = var.location
@@ -126,4 +126,13 @@ resource "azurerm_storage_account" "logs" {
     default_action = "Deny"
     bypass         = ["AzureServices"]
   }
+}
+
+resource "azurerm_log_analytics_workspace" "main" {
+  name                = var.log_analytics_name
+  resource_group_name = azurerm_resource_group.platform.name
+  location            = var.location
+  sku                 = "PerGB2018"
+  retention_in_days   = 30
+  tags                = local.common_tags
 }
