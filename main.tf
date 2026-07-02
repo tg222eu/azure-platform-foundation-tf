@@ -1,3 +1,7 @@
+# =============================================================================
+# MAIN - Platform Foundation
+# =============================================================================
+
 terraform {
   backend "azurerm" {
     resource_group_name  = "rg-terraform-state"
@@ -15,9 +19,9 @@ resource "azurerm_resource_group" "platform" {
   tags      = local.common_tags
 }
 
-# ==========================================
+# =============================================================================
 # Networking - VNet
-# ==========================================
+# =============================================================================
 
 resource "azurerm_virtual_network" "hub" {
   name                 = var.virtual_network_name
@@ -27,9 +31,9 @@ resource "azurerm_virtual_network" "hub" {
   tags                 = local.common_tags
 }
 
-# ==========================================
+# =============================================================================
 # Networking - Subnets
-# ==========================================
+# =============================================================================
 
 resource "azurerm_subnet" "app" {
   name                  = var.app_subnet_name
@@ -52,9 +56,9 @@ resource "azurerm_subnet" "mgmt" {
   address_prefixes      = [var.management_subnet_address_prefix]
 }
 
-# ==========================================
+# =============================================================================
 # Security - Key Vault
-# ==========================================
+# =============================================================================
 
 resource "azurerm_key_vault" "main" {
   name                        = var.key_vault_name
@@ -77,9 +81,9 @@ resource "azurerm_key_vault_secret" "test" {
   depends_on = [ azurerm_role_assignment.key_vault_access ]
 }
 
-# ==========================================
+# =============================================================================
 # Security - RBAC
-# ==========================================
+# =============================================================================
 
 resource "azurerm_role_assignment" "key_vault_access" {
   scope                 = azurerm_resource_group.platform.id
@@ -93,9 +97,9 @@ resource "azurerm_role_assignment" "resource_group_reader" {
   principal_id          = azuread_group.readers.object_id
 }
 
-# ==========================================
+# =============================================================================
 # Groups
-# ==========================================
+# =============================================================================
 
 resource "azuread_group" "readers" {
   display_name      = "rg-platform-readers"
@@ -104,9 +108,9 @@ resource "azuread_group" "readers" {
   mail_enabled      = false
 }
 
-# ==========================================
+# =============================================================================
 # Analytics & Logs - Storage
-# ==========================================
+# =============================================================================
 
 resource "azurerm_storage_account" "logs" {
   name                        = var.storage_account_log_name
