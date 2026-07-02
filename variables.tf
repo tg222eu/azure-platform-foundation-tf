@@ -130,6 +130,7 @@ variable "key_vault_name" {
 variable "secret_value" {
   description = "Key name"
   type        = string
+  sensitive   = true
   # Key value stored locally
 }
 
