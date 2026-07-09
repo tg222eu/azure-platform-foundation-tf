@@ -28,9 +28,9 @@ resource "azurerm_log_analytics_workspace" "main" {
 }
 
 resource "azurerm_monitor_diagnostic_setting" "keyvault" {
-    name = "keyvault-diagnostics"
-    target_resource_id = azurerm_key_vault.main.id
-    log_analytics_workspace_id = azurerm_log_analytics_workspace.main.id
+    name                        = "keyvault-diagnostics"
+    target_resource_id          = azurerm_key_vault.main.id
+    log_analytics_workspace_id  = azurerm_log_analytics_workspace.main.id
 
     enabled_log {
         category = "AuditEvent"
@@ -39,4 +39,20 @@ resource "azurerm_monitor_diagnostic_setting" "keyvault" {
     enabled_metric {
         category = "AllMetrics"
     }
+}
+
+resource "azurerm_monitor_diagnostic_setting" "vnet" {
+  name                        = "vnet-diagnostics"
+  target_resource_id          = azurerm_virtual_network.hub.id
+  log_analytics_workspace_id  = azurerm_log_analytics_workspace.main.id
+
+  enabled_metric {
+    category = "AllMetrics"
+  }
+}
+
+resource "azurerm_monitor_diagnostic_settings" "nsg_app" {
+  name                        = "nsg-diagnostics"
+  target_resource_id          = azurerm_network_security_group.app.id
+  log_analytics_workspace_id  = azurerm_log_analytics_workspace.main.id
 }
