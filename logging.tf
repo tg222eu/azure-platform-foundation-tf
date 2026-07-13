@@ -37,7 +37,6 @@ resource "azurerm_monitor_diagnostic_setting" "keyvault" {
     log_analytics_workspace_id  = azurerm_log_analytics_workspace.main.id
 
     enabled_log { category = "AuditEvent" }
-
     enabled_metric { category = "AllMetrics" }
 }
 
@@ -52,6 +51,14 @@ resource "azurerm_monitor_diagnostic_setting" "vnet" {
 resource "azurerm_monitor_diagnostic_setting" "storage" {
   name                        = "storage-diagnostics"
   target_resource_id          = azurerm_storage_account.main.id
+  log_analytics_workspace_id  = azurerm_log_analytics_workspace.main.id
+
+  enabled_metric { category = "AllMetrics" }
+}
+
+resource "azurerm_monitor_diagnostic_setting" "storage_blob" {
+  name                        = "storage-diagnostics"
+  target_resource_id          = "${azurerm_storage_account.main.id}/blobServices/default"
   log_analytics_workspace_id  = azurerm_log_analytics_workspace.main.id
 
   enabled_metric { category = "AllMetrics" }
