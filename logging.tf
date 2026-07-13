@@ -65,6 +65,34 @@ resource "azurerm_monitor_diagnostic_setting" "nsg_app" {
   }
 }
 
+resource "azurerm_monitor_diagnostic_setting" "nsg_data" {
+  name                        = "nsg-diagnostics"
+  target_resource_id          = azurerm_network_security_group.data.id
+  log_analytics_workspace_id  = azurerm_log_analytics_workspace.main.id
+
+  enabled_log {
+    category = "allLogs"
+  }
+
+  enabled_metric {
+    category = "AllMetrics"
+  }
+}
+
+resource "azurerm_monitor_diagnostic_setting" "nsg_mgmt" {
+  name                        = "nsg-diagnostics"
+  target_resource_id          = azurerm_network_security_group.mgmt.id
+  log_analytics_workspace_id  = azurerm_log_analytics_workspace.main.id
+
+  enabled_log {
+    category = "allLogs"
+  }
+
+  enabled_metric {
+    category = "AllMetrics"
+  }
+}
+
 resource "azurerm_monitor_diagnostic_setting" "storage" {
   name = "storage-diagnostics"
   target_resource_id          = azurerm_storage_account.main.id
