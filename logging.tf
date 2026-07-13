@@ -67,19 +67,23 @@ resource "azurerm_monitor_diagnostic_setting" "nsg_app" {
 
 resource "azurerm_monitor_diagnostic_setting" "storage" {
   name = "storage-diagnostics"
-  target_resource_id = azurerm_storage_account.main.id
-  log_analytics_workspace_id = azurerm_log_analytics_workspace.main.id
+  target_resource_id          = azurerm_storage_account.main.id
+  log_analytics_workspace_id  = azurerm_log_analytics_workspace.main.id
 
   enabled_log {
     category = "StorageRead"
   }
+
   enabled_log {
     category = "StorageWrite"
   }
+
   enabled_log {
     category = "StorageDelete"
   }
+
   enabled_metric {
     category = "AllMetrics"
   }
+
 }
