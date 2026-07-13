@@ -27,6 +27,10 @@ resource "azurerm_log_analytics_workspace" "main" {
   tags                = local.common_tags
 }
 
+# =============================================================================
+# Monitor Diagnostic Settings
+# =============================================================================
+
 resource "azurerm_monitor_diagnostic_setting" "keyvault" {
     name                        = "keyvault-diagnostics"
     target_resource_id          = azurerm_key_vault.main.id
