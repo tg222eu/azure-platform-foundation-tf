@@ -63,10 +63,6 @@ resource "azurerm_monitor_diagnostic_setting" "nsg_app" {
   enabled_log {
     category = "allLogs"
   }
-
-  enabled_metric {
-    category = "AllMetrics"
-  }
 }
 
 resource "azurerm_monitor_diagnostic_setting" "nsg_data" {
@@ -77,10 +73,6 @@ resource "azurerm_monitor_diagnostic_setting" "nsg_data" {
   enabled_log {
     category = "allLogs"
   }
-
-  enabled_metric {
-    category = "AllMetrics"
-  }
 }
 
 resource "azurerm_monitor_diagnostic_setting" "nsg_mgmt" {
@@ -90,10 +82,6 @@ resource "azurerm_monitor_diagnostic_setting" "nsg_mgmt" {
 
   enabled_log {
     category = "allLogs"
-  }
-
-  enabled_metric {
-    category = "AllMetrics"
   }
 }
 
