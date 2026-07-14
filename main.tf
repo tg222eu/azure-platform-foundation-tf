@@ -72,8 +72,8 @@ resource "azurerm_key_vault" "main" {
   tags                        = local.common_tags
 }
 
-resource "azurerm_key_vault_secret" "test" {
-  name          = "sample-secret"
+resource "azurerm_key_vault_secret" "main" {
+  name          = "secret"
   value         = var.secret_value # Have no purpose yet, just for testing
   key_vault_id  = azurerm_key_vault.main.id
   tags          = local.common_tags
