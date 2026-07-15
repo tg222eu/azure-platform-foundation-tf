@@ -102,7 +102,7 @@ resource "azurerm_role_assignment" "resource_group_reader" {
 # =============================================================================
 
 resource "azuread_group" "readers" {
-  display_name      = "rg-platform-readers"
+  display_name      = "${local.naming_prefix}-readers"
   description       = "Read-only access to platform resource group"
   security_enabled  = true
   mail_enabled      = false
