@@ -5,6 +5,30 @@
 # All variables are declared here
 # =============================================================================
 
+variable "environment" {
+    description = "Environment name (dev, test, prod)"
+    type        = string
+    default     = "dev"
+}
+
+variable "project" {
+    description = "Project name"
+    type        = string
+    default     = "platform"
+}
+
+variable "owner" {
+    description = "Owner name"
+    type        = string
+    default     = "Thorvald"
+}
+
+variable "cost_center" {
+    description = "Cost center for billing"
+    type        = string
+    default     = "IT-Platform"
+}
+
 variable "location" {
     description = "Azure region"
     type        = string
@@ -14,19 +38,19 @@ variable "location" {
 variable "platform_resource_group_name" {
     description = "Resource group"
     type        = string
-    default     = "rg-platform-dev"
+    default     = "rg-${var.project}-${var.environment}"
 }
 
 variable "virtual_network_name" {
     description = "App subnet"
     type        = string
-    default     = "vnet-platform-dev"
+    default     = "vnet-${var.project}-${var.environment}"
 }
 
 variable "consumption_budget_name" {
     description = "Budget consumption name"
     type = string
-    default = "budget-platform-dev"
+    default = "budget-${var.project}-${var.environment}"
 }
 
 variable "alert_email" {
@@ -42,19 +66,19 @@ variable "alert_email" {
 variable "app_subnet_name" {
     description = "App subnet name"
     type        = string
-    default     = "snet-app-platform-dev"
+    default     = "snet-app-${var.project}-${var.environment}"
 }
 
 variable "data_subnet_name" {
     description = "Data subnet name"
     type        = string
-    default     = "snet-data-platform-dev"
+    default     = "snet-data-${var.project}-${var.environment}"
 }
 
 variable "management_subnet_name" {
     description = "Management subnet name"
     type        = string
-    default     = "snet-mgmt-platform-dev"
+    default     = "snet-mgmt-${var.project}-${var.environment}"
 }
 
 variable "app_subnet_address_prefix" {
@@ -82,41 +106,19 @@ variable "management_subnet_address_prefix" {
 variable "app_nsg_name" {
     description = "App NSG"
     type        = string
-    default     = "nsg-app-platform-dev"
+    default     = "nsg-app-${var.project}-${var.environment}"
 }
 
 variable "data_nsg_name" {
     description = "Data NSG"
     type        = string
-    default     = "nsg-data-platform-dev"
+    default     = "nsg-data-${var.project}-${var.environment}"
 }
 
 variable "mgmt_nsg_name" {
     description = "Management NSG"
     type        = string
-    default     = "nsg-mgmt-platform-dev"
-}
-
-# =============================================================================
-# TAGS
-# =============================================================================
-
-variable "environment" {
-    description = "Environment name (dev, test, prod)" # test/prod not used yet
-    type        = string
-    default     = "dev"
-}
-
-variable "owner" {
-    description = "Owner name"
-    type        = string
-    default     = "Thorvald"
-}
-
-variable "cost_center" {
-    description = "Cost center for billing"
-    type        = string
-    default     = "IT-Platform"
+    default     = "nsg-mgmt-${var.project}-${var.environment}"
 }
 
 # =============================================================================
@@ -159,5 +161,5 @@ variable "storage_account_log_name" {
 variable "log_analytics_name" {
   description = "Name of log analytics"
   type        = string
-  default     = "log-platform-dev"
+  default     = "log-${var.project}-${var.environment}"
 }
