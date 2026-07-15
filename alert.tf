@@ -32,7 +32,7 @@ resource azurerm_consumption_budget_resource_group "platform_budget" {
 
     notification {
         enabled = true
-        threshold = 10
+        threshold = 5
         operator = "GreaterThan"
         contact_emails = [var.alert_email]
         contact_groups = [azurerm_monitor_action_group.platform_alerts.id]
@@ -40,7 +40,7 @@ resource azurerm_consumption_budget_resource_group "platform_budget" {
 
     notification {
         enabled = true
-        threshold = 20
+        threshold = 15
         operator = "GreaterThan"
         contact_emails = [var.alert_email]
         contact_groups = [azurerm_monitor_action_group.platform_alerts.id]
