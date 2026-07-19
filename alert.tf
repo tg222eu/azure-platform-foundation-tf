@@ -21,14 +21,26 @@ resource "azurerm_monitor_action_group" "platform_alerts" {
 # =============================================================================
 
 resource "azurerm_monitor_activity_log_alert" "key_vault_changes" {
-    name = "${local.naming_prefix}-kv-secret-changes"
+    name                = "${local.naming_prefix}-kv-secret-changes"
+    resource_group_name = azurerm_resource_group.platform
+    scopes              = [azurerm_key_vault.main.id]
+    location = "Global"
+
+    criteria {
+        category = "Administrative"
+        operation_name = "Microsoft.KeyVault/vaults/secrets/*"
+    }
+
+    action {
+        action_group_id = azurerm_monitor_action_group.platform_alerts.id
+    }
 }
 
 # =============================================================================
 # Budget
 # =============================================================================
 
-resource azurerm_consumption_budget_resource_group "platform_budget" {
+resource azurerm_consumption_budget_resource_group "platform_budget_exceeded" {
     name                = var.consumption_budget_name
     resource_group_id   = azurerm_resource_group.platform
     time_grain          = "Monthly"
