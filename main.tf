@@ -14,7 +14,7 @@ terraform {
 data "azurerm_client_config" "current_user" {}
 
 resource "azurerm_resource_group" "platform" {
-  name      = var.platform_resource_group_name
+  name      = "${local.naming_prefix}-resource-group"
   location  = var.location
   tags      = local.common_tags
 }
@@ -24,7 +24,7 @@ resource "azurerm_resource_group" "platform" {
 # =============================================================================
 
 resource "azurerm_virtual_network" "hub" {
-  name                 = var.virtual_network_name
+  name                 = "${local.naming_prefix}-vnet"
   location             = var.location
   resource_group_name  = azurerm_resource_group.platform.name
   address_space        = ["10.0.0.0/16"]
@@ -36,21 +36,21 @@ resource "azurerm_virtual_network" "hub" {
 # =============================================================================
 
 resource "azurerm_subnet" "app" {
-  name                  = var.app_subnet_name
+  name                  = "${local.naming_prefix}-snet-app"
   virtual_network_name  = azurerm_virtual_network.hub.name
   resource_group_name   = azurerm_resource_group.platform.name
   address_prefixes      = [var.app_subnet_address_prefix]
 }
 
 resource "azurerm_subnet" "data" {
-  name                  = var.data_subnet_name
+  name                  = "${local.naming_prefix}-snet-data"
   virtual_network_name  = azurerm_virtual_network.hub.name
   resource_group_name   = azurerm_resource_group.platform.name
   address_prefixes      = [var.data_subnet_address_prefix]
 }
 
 resource "azurerm_subnet" "mgmt" {
-  name                  = var.management_subnet_name
+  name                  = "${local.naming_prefix}-snet-mgmt"
   virtual_network_name  = azurerm_virtual_network.hub.name
   resource_group_name   = azurerm_resource_group.platform.name
   address_prefixes      = [var.management_subnet_address_prefix]

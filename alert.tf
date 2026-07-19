@@ -41,7 +41,7 @@ resource "azurerm_monitor_activity_log_alert" "key_vault_changes" {
 # =============================================================================
 
 resource azurerm_consumption_budget_resource_group "platform_budget_exceeded" {
-    name                = var.consumption_budget_name
+    name                = "${local.naming_prefix}-${var.consumption_budget_name}"
     resource_group_id   = azurerm_resource_group.platform
     time_grain          = "Monthly"
     amount              = 100 # SEK currency

@@ -1,10 +1,16 @@
 # =============================================================================
 # VARIABLES - Platform Foundation
 # =============================================================================
-# Naming conversion ${local.naming_prefix}-resource
-# All variables are declared here
-# =============================================================================
 
+variable "location" {
+    description = "Azure region"
+    type        = string
+    default     = "Sweden Central"
+}
+
+# =============================================================================
+# TAGS
+# =============================================================================
 variable "environment_name" {
     description = "Environment name (dev, test, prod)"
     type        = string
@@ -29,28 +35,14 @@ variable "cost_center" {
     default     = "IT-Platform"
 }
 
-variable "location" {
-    description = "Azure region"
-    type        = string
-    default     = "Sweden Central"
-}
-
-variable "platform_resource_group_name" {
-    description = "Resource group"
-    type        = string
-    default     = "${local.naming_prefix}-rg"
-}
-
-variable "virtual_network_name" {
-    description = "App subnet"
-    type        = string
-    default     = "${local.naming_prefix}-vnet"
-}
+# =============================================================================
+# ALERT
+# =============================================================================
 
 variable "consumption_budget_name" {
     description = "Budget consumption name"
     type = string
-    default = "${local.naming_prefix}-budget"
+    default = "budget"
 }
 
 variable "alert_email" {
@@ -62,24 +54,6 @@ variable "alert_email" {
 # =============================================================================
 # SUBNETS
 # =============================================================================
-
-variable "app_subnet_name" {
-    description = "App subnet name"
-    type        = string
-    default     = "${local.naming_prefix}-snet-app"
-}
-
-variable "data_subnet_name" {
-    description = "Data subnet name"
-    type        = string
-    default     = "${local.naming_prefix}-snet-data"
-}
-
-variable "management_subnet_name" {
-    description = "Management subnet name"
-    type        = string
-    default     = "${local.naming_prefix}-snet-mgmt"
-}
 
 variable "app_subnet_address_prefix" {
     description = "App subnet address prefix"
@@ -100,29 +74,7 @@ variable "management_subnet_address_prefix" {
 }
 
 # =============================================================================
-# NSG
-# =============================================================================
-
-variable "app_nsg_name" {
-    description = "App NSG"
-    type        = string
-    default     = "${local.naming_prefix}-nsg-app"
-}
-
-variable "data_nsg_name" {
-    description = "Data NSG"
-    type        = string
-    default     = "${local.naming_prefix}-nsg-data"
-}
-
-variable "mgmt_nsg_name" {
-    description = "Management NSG"
-    type        = string
-    default     = "${local.naming_prefix}-nsg-mgmt"
-}
-
-# =============================================================================
-# SECURITY RULES VARIABLES
+# SECURITY & KEYS
 # =============================================================================
 
 variable "my_public_ip" {
@@ -130,10 +82,6 @@ variable "my_public_ip" {
   type        = string
   # IP stored locally
 }
-
-# =============================================================================
-# KEYS
-# =============================================================================
 
 variable "key_vault_name" {
   description = "Key vault name"
@@ -156,10 +104,4 @@ variable "storage_account_log_name" {
     description = "Name of log storage accoount"
     type        = string
     # Name stored locally
-}
-
-variable "log_analytics_name" {
-  description = "Name of log analytics"
-  type        = string
-  default     = "${local.naming_prefix}-log"
 }

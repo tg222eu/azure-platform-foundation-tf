@@ -19,7 +19,7 @@ resource "azurerm_storage_account" "main" {
 }
 
 resource "azurerm_log_analytics_workspace" "main" {
-  name                = var.log_analytics_name
+  name                = "${local.naming_prefix}-log"
   resource_group_name = azurerm_resource_group.platform.name
   location            = var.location
   sku                 = "PerGB2018"
