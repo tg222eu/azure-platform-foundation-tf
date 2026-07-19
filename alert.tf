@@ -3,14 +3,21 @@
 # =============================================================================
 
 resource "azurerm_monitor_action_group" "main" {
-    name = "alerts-platform-dev"
-    resource_group_name = azurerm_resource_group.main.name
-    short_name = "ag-alerts"
+    name                    = "alerts-platform-dev"
+    resource_group_name     = azurerm_resource_group.main.name
+    short_name              = "ag-alerts"
 
+/*
     email_receiver {
-      name = "platform-email"
-      email_address = var.alert_email
-      use_common_alert_schema = true
+      name                      = "platform-email"
+      email_address             = var.alert_email
+      use_common_alert_schema   = true
+    }
+*/
+    webhook_receiver {
+      name                      = webhook-test
+      service_uri               = "https://webhook.site/#!/view/63d16022-3c7f-4ec2-8352-24d90ea8ec1a"
+      use_common_alert_schema   = true
     }
     
     tags = local.common_tags
@@ -50,43 +57,43 @@ resource azurerm_consumption_budget_resource_group "project_budget_exceeded" {
     }
 
     notification {
-        enabled = true
-        threshold = 5
-        operator = "GreaterThan"
-        contact_emails = [var.alert_email]
-        contact_groups = [azurerm_monitor_action_group.main.id]
+        enabled         = true
+        threshold       = 5
+        operator        = "GreaterThan"
+        contact_emails  = [var.alert_email]
+        contact_groups  = [azurerm_monitor_action_group.main.id]
+    }
+
+    notification {
+        enabled         = true
+        threshold       = 15
+        operator        = "GreaterThan"
+        contact_emails  = [var.alert_email]
+        contact_groups  = [azurerm_monitor_action_group.main.id]
     }
 
     notification {
         enabled = true
-        threshold = 15
-        operator = "GreaterThan"
-        contact_emails = [var.alert_email]
-        contact_groups = [azurerm_monitor_action_group.main.id]
-    }
-
-    notification {
-        enabled = true
-        threshold = 40
-        operator = "GreaterThan"
-        contact_emails = [var.alert_email]
-        contact_groups = [azurerm_monitor_action_group.main.id]
+        threshold       = 40
+        operator        = "GreaterThan"
+        contact_emails  = [var.alert_email]
+        contact_groups  = [azurerm_monitor_action_group.main.id]
     }
     
     notification {
-        enabled = true
-        threshold = 70
-        operator = "GreaterThan"
-        contact_emails = [var.alert_email]
-        contact_groups = [azurerm_monitor_action_group.main.id]
+        enabled         = true
+        threshold       = 70
+        operator        = "GreaterThan"
+        contact_emails  = [var.alert_email]
+        contact_groups  = [azurerm_monitor_action_group.main.id]
     }
 
     notification {
         enabled = true
-        threshold = 100
-        operator = "GreaterThan"
-        contact_emails = [var.alert_email]
-        contact_groups = [azurerm_monitor_action_group.main.id]
+        threshold       = 100
+        operator        = "GreaterThan"
+        contact_emails  = [var.alert_email]
+        contact_groups  = [azurerm_monitor_action_group.main.id]
     }
 
 depends_on = [azurerm_monitor_action_group.main]
