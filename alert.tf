@@ -15,7 +15,7 @@ resource "azurerm_monitor_action_group" "main" {
     }
 */
     webhook_receiver {
-      name                      = webhook-test
+      name                      = "webhook-test"
       service_uri               = "https://webhook.site/#!/view/63d16022-3c7f-4ec2-8352-24d90ea8ec1a"
       use_common_alert_schema   = true
     }
