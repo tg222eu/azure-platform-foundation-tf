@@ -4,7 +4,7 @@
 
 resource "azurerm_storage_account" "main" {
   name                        = var.storage_account_log_name
-  resource_group_name         = azurerm_resource_group.platform.name
+  resource_group_name         = azurerm_resource_group.main.name
   location                    = var.location
   account_tier                = "Standard"
   account_replication_type    = "LRS"
@@ -20,7 +20,7 @@ resource "azurerm_storage_account" "main" {
 
 resource "azurerm_log_analytics_workspace" "main" {
   name                = "${local.naming_prefix}-log"
-  resource_group_name = azurerm_resource_group.platform.name
+  resource_group_name = azurerm_resource_group.main.name
   location            = var.location
   sku                 = "PerGB2018"
   retention_in_days   = 30

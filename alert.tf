@@ -2,9 +2,9 @@
 # Action Group
 # =============================================================================
 
-resource "azurerm_monitor_action_group" "platform_alerts" {
+resource "azurerm_monitor_action_group" "main" {
     name = "alerts-platform-dev"
-    resource_group_name = azurerm_resource_group.platform.name
+    resource_group_name = azurerm_resource_group.main.name
     short_name = "plat-alerts"
 
     email_receiver {
@@ -22,7 +22,7 @@ resource "azurerm_monitor_action_group" "platform_alerts" {
 
 resource "azurerm_monitor_activity_log_alert" "key_vault_changes" {
     name                = "${local.naming_prefix}-kv-secret-changes"
-    resource_group_name = azurerm_resource_group.platform
+    resource_group_name = azurerm_resource_group.main
     scopes              = [azurerm_key_vault.main.id]
     location = "Global"
 
@@ -32,7 +32,7 @@ resource "azurerm_monitor_activity_log_alert" "key_vault_changes" {
     }
 
     action {
-        action_group_id = azurerm_monitor_action_group.platform_alerts.id
+        action_group_id = azurerm_monitor_action_group.main_alerts.id
     }
 }
 
@@ -40,9 +40,9 @@ resource "azurerm_monitor_activity_log_alert" "key_vault_changes" {
 # Budget
 # =============================================================================
 
-resource azurerm_consumption_budget_resource_group "platform_budget_exceeded" {
+resource azurerm_consumption_budget_resource_group "project_budget_exceeded" {
     name                = "${local.naming_prefix}-${var.consumption_budget_name}"
-    resource_group_id   = azurerm_resource_group.platform
+    resource_group_id   = azurerm_resource_group.main
     time_grain          = "Monthly"
     amount              = 100 # SEK currency
 
@@ -55,7 +55,7 @@ resource azurerm_consumption_budget_resource_group "platform_budget_exceeded" {
         threshold = 5
         operator = "GreaterThan"
         contact_emails = [var.alert_email]
-        contact_groups = [azurerm_monitor_action_group.platform_alerts.id]
+        contact_groups = [azurerm_monitor_action_group.main.id]
     }
 
     notification {
@@ -63,7 +63,7 @@ resource azurerm_consumption_budget_resource_group "platform_budget_exceeded" {
         threshold = 15
         operator = "GreaterThan"
         contact_emails = [var.alert_email]
-        contact_groups = [azurerm_monitor_action_group.platform_alerts.id]
+        contact_groups = [azurerm_monitor_action_group.main.id]
     }
 
     notification {
@@ -71,7 +71,7 @@ resource azurerm_consumption_budget_resource_group "platform_budget_exceeded" {
         threshold = 40
         operator = "GreaterThan"
         contact_emails = [var.alert_email]
-        contact_groups = [azurerm_monitor_action_group.platform_alerts.id]
+        contact_groups = [azurerm_monitor_action_group.main.id]
     }
     
     notification {
@@ -79,7 +79,7 @@ resource azurerm_consumption_budget_resource_group "platform_budget_exceeded" {
         threshold = 70
         operator = "GreaterThan"
         contact_emails = [var.alert_email]
-        contact_groups = [azurerm_monitor_action_group.platform_alerts.id]
+        contact_groups = [azurerm_monitor_action_group.main.id]
     }
 
     notification {
@@ -87,8 +87,8 @@ resource azurerm_consumption_budget_resource_group "platform_budget_exceeded" {
         threshold = 100
         operator = "GreaterThan"
         contact_emails = [var.alert_email]
-        contact_groups = [azurerm_monitor_action_group.platform_alerts.id]
+        contact_groups = [azurerm_monitor_action_group.main.id]
     }
 
-depends_on = [azurerm_monitor_action_group.platform_alerts]
+depends_on = [azurerm_monitor_action_group.main]
 }
