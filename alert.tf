@@ -22,7 +22,7 @@ resource "azurerm_monitor_action_group" "main" {
 
 resource "azurerm_monitor_activity_log_alert" "key_vault_changes" {
     name                = "${local.naming_prefix}-kv-secret-changes"
-    resource_group_name = azurerm_resource_group.main
+    resource_group_name = azurerm_resource_group.main.id
     scopes              = [azurerm_key_vault.main.id]
     location = "Global"
 
