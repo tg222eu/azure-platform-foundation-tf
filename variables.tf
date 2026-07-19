@@ -39,12 +39,6 @@ variable "cost_center" {
 # ALERT
 # =============================================================================
 
-variable "consumption_budget_name" {
-    description = "Budget consumption name"
-    type = string
-    default = "budget"
-}
-
 variable "alert_email" {
     description = "Email which alerts are sent to"
     type = string

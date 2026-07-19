@@ -32,7 +32,7 @@ resource "azurerm_monitor_activity_log_alert" "key_vault_changes" {
     }
 
     action {
-        action_group_id = azurerm_monitor_action_group.main_alerts.id
+        action_group_id = azurerm_monitor_action_group.main.id
     }
 }
 
@@ -41,8 +41,8 @@ resource "azurerm_monitor_activity_log_alert" "key_vault_changes" {
 # =============================================================================
 
 resource azurerm_consumption_budget_resource_group "project_budget_exceeded" {
-    name                = "${local.naming_prefix}-${var.consumption_budget_name}"
-    resource_group_id   = azurerm_resource_group.main
+    name                = "${local.naming_prefix}-consumption"
+    resource_group_id   = azurerm_resource_group.main.id
     time_grain          = "Monthly"
     amount              = 100 # SEK currency
 
