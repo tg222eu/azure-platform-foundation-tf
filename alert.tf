@@ -41,7 +41,7 @@ resource "azurerm_monitor_scheduled_query_rules_alert_v2" "kv_secret_get" {
         AzureDiagnostics
         | where OperationName == "SecretGet"
     QUERY
-    time_aggregation_method = 0
+    time_aggregation_method = "Count"
     threshold = 0
     operator = "GreaterThan"
     }
