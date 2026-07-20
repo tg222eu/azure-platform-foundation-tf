@@ -27,20 +27,29 @@ resource "azurerm_monitor_action_group" "main" {
 # Keyvault
 # =============================================================================
 
-resource "azurerm_monitor_activity_log_alert" "key_vault_changes" {
-    name                = "${local.naming_prefix}-kv-changes"
-    resource_group_name = azurerm_resource_group.main.name
-    scopes              = [azurerm_key_vault.main.id]
-    location = "Global"
+resource "azurerm_monitor_scheduled_query_rules_alert_v2" "kv_secret_get" {
+    name                        = "${local.naming_prefix}-kv-secret-get"
+    resource_group_name         = azurerm_resource_group.main.name
+    location                    = var.location
+    evaluation_frequency        = "PT5M"
+    window_duration             = "PT5M"
+    scopes                      = [azurerm_log_analytics_workspace.main.id]
+    severity                    = 2
 
     criteria {
-        category = "Administrative"
-        operation_name = "Microsoft.KeyVault/vaults/secrets/read"
+      query = <<-QUERY
+        AzureDiagnostics
+        | where OperationName == "SecretGet"
+    QUERY
+    time_aggregation_method = 0
+    threshold = 0
+    operator = GreaterThan
     }
 
     action {
-        action_group_id = azurerm_monitor_action_group.main.id
+      action_groups = [azurerm_monitor_action_group.main.id]
     }
+    tags = local.common_tags
 }
 
 # =============================================================================

@@ -36,8 +36,8 @@ resource "azurerm_monitor_diagnostic_setting" "keyvault" {
     target_resource_id          = azurerm_key_vault.main.id
     log_analytics_workspace_id  = azurerm_log_analytics_workspace.main.id
 
-    enabled_log { category = "AuditEvent" }
-    enabled_metric { category = "AllMetrics" }
+    enabled_log     { category = "AuditEvent" }
+    enabled_metric  { category = "AllMetrics" }
 }
 
 resource "azurerm_monitor_diagnostic_setting" "storage" {
