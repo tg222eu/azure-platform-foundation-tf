@@ -43,7 +43,7 @@ resource "azurerm_monitor_scheduled_query_rules_alert_v2" "kv_secret_get" {
     QUERY
     time_aggregation_method = 0
     threshold = 0
-    operator = GreaterThan
+    operator = "GreaterThan"
     }
 
     action {
