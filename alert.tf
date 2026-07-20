@@ -27,12 +27,13 @@ resource "azurerm_monitor_action_group" "main" {
 # Keyvault
 # =============================================================================
 
+# The alert currently has no realt purpose. Just testing alert to check if secret was viewed
 resource "azurerm_monitor_scheduled_query_rules_alert_v2" "kv_secret_get" {
     name                        = "${local.naming_prefix}-kv-secret-get"
     resource_group_name         = azurerm_resource_group.main.name
     location                    = var.location
-    evaluation_frequency        = "PT5M"
-    window_duration             = "PT5M"
+    evaluation_frequency        = "PT60M"
+    window_duration             = "PT60M"
     scopes                      = [azurerm_log_analytics_workspace.main.id]
     severity                    = 2
 
