@@ -3,7 +3,7 @@
 # =============================================================================
 
 resource "azurerm_monitor_action_group" "main" {
-    name                    = "alerts-platform-dev"
+    name                    = "${local.naming_prefix}-alerts"
     resource_group_name     = azurerm_resource_group.main.name
     short_name              = "ag-alerts"
 
@@ -35,6 +35,7 @@ resource "azurerm_monitor_activity_log_alert" "key_vault_changes" {
 
     criteria {
         category = "Administrative"
+        operation_name = "Microsoft.KeyVault/vaults/secrets/read"
     }
 
     action {
