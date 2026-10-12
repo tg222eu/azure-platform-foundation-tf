@@ -33,3 +33,24 @@ repo:<owner>@<orgId>/<repo>@<repoId>:ref:refs/heads/main
 repo:<owner>@<orgId>/<repo>@<repoId>:ref:pull_request
 ```
 Best practice for this CI pattern is to register both OIDC subjects: one for main and one for pull_request. The pull_request subject is only used when a workflow is triggered by a pull request. In the workflow YAML, on: pull_request: is a reserved GitHub event. Writing it with no extra options uses the default: run on all pull requests.
+
+Configuration needed for permission
+
+YAML
+```
+permissions:
+  id-token: write
+  contents: read
+
+jobs: 
+  terraform:
+    env:
+      ARM_USE_OIDC: true
+      ARM_USE_AZUREAD: true
+```
+
+HCL
+```
+use_azuread_auth = true
+use_oidc         = true
+```
