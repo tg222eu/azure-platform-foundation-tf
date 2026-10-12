@@ -25,7 +25,7 @@ AZURE_SUBSCRIPTION_ID
 
 Federation identity
 
-![alt text](https://raw.githubusercontent.com/tg222eu/azure-platform-foundation-tf/refs/heads/main/images/federate.png)
+![alt text](https://raw.githubusercontent.com/tg222eu/azure-platform-foundation-tf/refs/heads/main/images/federate2.png)
 
 The OIDC subjects used
 ```
