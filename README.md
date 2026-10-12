@@ -27,7 +27,9 @@ Federation identity
 
 ![alt text](https://raw.githubusercontent.com/tg222eu/azure-platform-foundation-tf/refs/heads/main/images/federate.png)
 
-The subject identifier used
+The OIDC subjects used
 ```
 repo:<owner>@<orgId>/<repo>@<repoId>:ref:refs/heads/main
+repo:<owner>@<orgId>/<repo>@<repoId>:ref:pull_request
 ```
+Best practice for this CI pattern is to register both OIDC subjects: one for main and one for pull_request. The pull_request subject is only used when a workflow is triggered by a pull request. In the workflow YAML, on: pull_request: is a reserved GitHub event. Writing it with no extra options uses the default: run on all pull requests.
