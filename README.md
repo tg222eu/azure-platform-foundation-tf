@@ -25,4 +25,4 @@ AZURE_SUBSCRIPTION_ID
 
 Federation identity
 
-![alt text](https://github.com/tg222eu/azure-platform-foundation-tf/tree/main/images/federate.png)
+![alt text](https://raw.githubusercontent.com/tg222eu/azure-platform-foundation-tf/refs/heads/main/images/federate.png)
