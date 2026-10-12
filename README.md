@@ -24,3 +24,5 @@ AZURE_TENANT_ID
 AZURE_SUBSCRIPTION_ID
 
 Federation identity
+
+![alt text](https://github.com/tg222eu/azure-platform-foundation-tf/tree/main/images/federate.png)
