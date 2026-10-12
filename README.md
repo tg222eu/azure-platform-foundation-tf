@@ -16,3 +16,11 @@ In an enterprise setup this first layer usually lives in a dedicated repo, for e
 In this lab I did the same job in the portal instead. Functionally it is the same bootstrap. (Dedicated repo later as a mini project?)
 
 I created App registration github-oidc-lab
+
+GitHub Secrets 
+
+AZURE_CLIENT_ID
+AZURE_TENANT_ID
+AZURE_SUBSCRIPTION_ID
+
+Federation identity
