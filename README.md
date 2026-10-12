@@ -26,3 +26,8 @@ AZURE_SUBSCRIPTION_ID
 Federation identity
 
 ![alt text](https://raw.githubusercontent.com/tg222eu/azure-platform-foundation-tf/refs/heads/main/images/federate.png)
+
+The subject identifier used
+```
+repo:<owner>@<orgId>/<repo>@<repoId>:ref:refs/heads/main
+```
