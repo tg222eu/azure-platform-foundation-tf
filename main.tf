@@ -94,15 +94,16 @@ resource "azurerm_key_vault_secret" "main" {
 resource "azurerm_role_assignment" "key_vault_access" {
   scope                = azurerm_resource_group.main.id
   role_definition_name = "Key Vault Secrets Officer"
-  principal_id         = data.azurerm_client_config.current_user.object_id
+  principal_id         = "899ce21f-3c84-4fae-95a7-c0f161e6f34b"
 }
 
 resource "azurerm_role_assignment" "resource_group_reader" {
   scope                = azurerm_resource_group.main.id
   role_definition_name = "Reader"
-  principal_id         = azuread_group.readers.object_id
+  principal_id         = "899ce21f-3c84-4fae-95a7-c0f161e6f34b"
 }
 
+# Lets GitHub Action manage the resources inside main resource group
 resource "azurerm_role_assignment" "resource_group_contributor" {
   scope                = azurerm_resource_group.main.id
   role_definition_name = "Contributor"
