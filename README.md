@@ -55,4 +55,4 @@ use_azuread_auth = true
 use_oidc         = true
 ```
 
-Some role assignments are used (Under Security - RBAC) which needs additional permission from the app registrar. The easiest method would be to grand the app Microsoft Graph permission, but this is not best practice and would have too much large blast radious. Instead I will be hardcoding the principal_id from github-oidc-labs 
+Some role assignments are used (Under Security - RBAC) which needs additional permission from the app registrar. The easiest method would be to grand the app Microsoft Graph permission, but this is not best practice and would have too much large blast radious. Instead I will be hardcoding the principal_id (Object ID under properties from github-oidc-labs service principle) from github-oidc-labs 
