@@ -30,10 +30,7 @@ resource "azurerm_log_analytics_workspace" "main" {
 # =============================================================================
 # Monitor Diagnostic Settings
 # =============================================================================
-#
-# Cost 15 sek a month to collect these logs. Will be use when needed
-#
-/*
+
 resource "azurerm_monitor_diagnostic_setting" "keyvault" {
   name                       = "keyvault-diagnostics"
   target_resource_id         = azurerm_key_vault.main.id
@@ -58,4 +55,3 @@ resource "azurerm_monitor_diagnostic_setting" "storage_blob" {
 
   enabled_metric { category = "AllMetrics" }
 }
-*/
