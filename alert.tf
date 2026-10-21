@@ -27,6 +27,8 @@ resource "azurerm_monitor_action_group" "main" {
 # Keyvault
 # =============================================================================
 
+/* Commenting out, checking cost analysis in Azure Monitor
+
 # The alert currently has no realt purpose. Just testing alert to check if secret was viewed
 resource "azurerm_monitor_scheduled_query_rules_alert_v2" "kv_secret_get" {
   name                 = "${local.naming_prefix}-kv-secret-get"
@@ -52,6 +54,8 @@ resource "azurerm_monitor_scheduled_query_rules_alert_v2" "kv_secret_get" {
   }
   tags = local.common_tags
 }
+
+*/
 
 # =============================================================================
 # Budget
