@@ -15,7 +15,7 @@ jobs:
         ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         ARM_USE_OIDC: true
         ARM_USE_AZUREAD: true
-        TF_VAR_key_secret_value: ${{ vars.KEY_SECRET_VALUE }}
+        TF_VAR_key_secret_value: ${{ secrets.KEY_SECRET_VALUE }}
         TF_VAR_key_vault_name: "kv-platform-dev-testlab"
         TF_VAR_my_public_ip: ${{ secrets.MY_PUBLIC_IP }}
         TF_VAR_storage_account_log_name: "stplatformlogsdev"
