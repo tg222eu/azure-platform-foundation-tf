@@ -42,3 +42,9 @@ jobs:
 
         - name: Terraform Plan
           run: terraform plan -no-color -lock=false # -no-color disables ANSI codes and makes output more readable
+
+        # Auto-applies on push to main, with no review step.
+        # TODO: replace with a separate apply job gated by a GitHub Environment (manual approval)
+        - name: Terraform Apply
+          if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+          run: terraform apply -auto-approve -no-color
