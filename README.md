@@ -58,3 +58,5 @@ use_oidc         = true
 Some role assignments are used (Under Security - RBAC) which needs additional permission from the app registrar. The easiest method would be to grand the app Microsoft Graph permission, but this is not best practice and would have too much large blast radious. Instead I will be hardcoding the principal_id (Object ID under properties from github-oidc-labs service principle) from github-oidc-labs 
 
 Initially I created the role assignment for Github Action of Contributor for the main resource group in Terraform, but we run into the chicken-and-egg problem again, which makes no benefit having it in the terraform. Add github-oidc-labs(service principle) as contributor manually in the portal in the resource group
+
+If at any point you need to run Terraform Apply locally , the user you login with needs to have Contributor role to Resource group "platform-dev-resource-group" and Key Vault Secret Officer role
